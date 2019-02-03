@@ -1,45 +1,25 @@
 'use strict';
 
-let notes = [];
+let notes = getSavedNotes();
 
 const filters = {
     searchText: ''
 };
 
-// check for existing saved data in local storage
-const notesJSON = localStorage.getItem('notes');
-
-if (notesJSON !== null) {
-    notes = JSON.parse(notesJSON);
-}
-
-
-const renderNotes = (notes, filters) => {
-    const filteredNotes = notes.filter(note => {
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
-    });
-
-    document.querySelector('.notes').innerHTML = '';
-    // render found notes to the DOM
-    filteredNotes.forEach(note => {
-        const paragraph = document.createElement('p');
-        paragraph.textContent = note.title;
-        document.querySelector('.notes').appendChild(paragraph);
-    });
-}
-
 renderNotes(notes, filters);
 
 
-const createNote = document.querySelector('button');
-createNote.addEventListener('click', event => {
+document.querySelector('button').addEventListener('click', e => {
+    // add new note object to notes array
     notes.push({
         title: '',
         body: ''
     });
 
-    // update local storage
-    localStorage.setItem('notes', JSON.stringify(notes));
+    saveNotes();
+
+    // render notes to the page
+    renderNotes(notes, filters);
 });
 
 
