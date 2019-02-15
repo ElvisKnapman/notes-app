@@ -16,15 +16,24 @@ const saveNotes = () => {
 }
 
 const generateNoteDOM = (note) => {
-    const paragraph = document.createElement('p');
+    const noteEl = document.createElement('div');
+    const textEl = document.createElement('span');
+    const button = document.createElement('button');
 
+    
+    // setup the remove note button
+    button.textContent = 'x';
+    noteEl.appendChild(button);
+
+    // setup note title text
     if (note.title.length > 0) {
-        paragraph.textContent = note.title;
+        textEl.textContent = note.title;
     } else {
-        paragraph.textContent = 'Unnamed note';
+        textEl.textContent = 'Unnamed note';
     }
+    noteEl.appendChild(textEl);
 
-    return paragraph;
+    return noteEl;
 };
 
 // render application notes
