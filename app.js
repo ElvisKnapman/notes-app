@@ -9,9 +9,10 @@ const filters = {
 renderNotes(notes, filters);
 
 
-document.querySelector('button').addEventListener('click', e => {
+document.querySelector('#create-note').addEventListener('click', e => {
     // add new note object to notes array
     notes.push({
+        id: uuidv4(),
         title: '',
         body: ''
     });
