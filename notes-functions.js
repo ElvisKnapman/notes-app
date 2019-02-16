@@ -10,6 +10,19 @@ const getSavedNotes = () => {
     }
 };
 
+// remove a note from the list
+const removeNote = (id) => {
+    const noteIndex = notes.findIndex(function(note) {
+        return note.id === id;
+    });
+
+    // if no note was found above, noteIndex would contain -1. If a note was found, noteIndex contains its position
+    // and we will delete it
+    if (noteIndex > -1) {
+        notes.splice(noteIndex, 1);
+    }
+}
+
 // save notes to localStorage
 const saveNotes = () => {
     localStorage.setItem('notes', JSON.stringify(notes));
@@ -24,6 +37,11 @@ const generateNoteDOM = (note) => {
     // setup the remove note button
     button.textContent = 'x';
     noteEl.appendChild(button);
+    button.addEventListener('click', (event) => {
+        removeNote(note.id);
+        saveNotes(notes);
+        renderNotes(notes, filters);
+    });
 
     // setup note title text
     if (note.title.length > 0) {
