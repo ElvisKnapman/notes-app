@@ -30,7 +30,7 @@ const saveNotes = () => {
 
 const generateNoteDOM = (note) => {
     const noteEl = document.createElement('div');
-    const textEl = document.createElement('span');
+    const textEl = document.createElement('a');
     const button = document.createElement('button');
 
     
@@ -49,6 +49,7 @@ const generateNoteDOM = (note) => {
     } else {
         textEl.textContent = 'Unnamed note';
     }
+    textEl.setAttribute('href', `/edit.html#${note.id}`);
     noteEl.appendChild(textEl);
 
     return noteEl;
