@@ -10,17 +10,18 @@ renderNotes(notes, filters);
 
 
 document.querySelector('#create-note').addEventListener('click', e => {
+    const id = uuidv4();
     // add new note object to notes array
     notes.push({
-        id: uuidv4(),
+        id: id,
         title: '',
         body: ''
     });
 
     saveNotes();
 
-    // render notes to the page
-    renderNotes(notes, filters);
+    // redirect to edit page
+    location.assign(`/edit.html#${id}`);
 });
 
 
