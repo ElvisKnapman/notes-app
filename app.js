@@ -18,7 +18,7 @@ document.querySelector('#create-note').addEventListener('click', e => {
         body: ''
     });
 
-    saveNotes();
+    saveNotes(notes);
 
     // redirect to edit page
     location.assign(`/edit.html#${id}`);
