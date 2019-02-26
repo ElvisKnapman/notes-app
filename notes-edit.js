@@ -6,10 +6,10 @@ const removeElement = document.querySelector('#remove-note');
 const noteId = location.hash.substring(1);
 
 // retrieve notes stored in localStorage
-const notes = getSavedNotes();
+let notes = getSavedNotes();
 
 // find and store the current note object being edited
-const note = notes.find((note) => {
+let note = notes.find((note) => {
     return note.id === noteId;
 });
 
@@ -38,4 +38,21 @@ removeElement.addEventListener('click', (event) => {
     removeNote(note.id);
     saveNotes(notes);
     location.assign('/index.html');
+});
+
+window.addEventListener('storage', (event) => {
+    if (event.key === 'notes') {
+        notes = JSON.parse(event.newValue)
+    }
+    note = notes.find((note) => {
+        return note.id === noteId;
+    });
+    
+    // if a note isn't found, redirect back to the home page
+    if (note === undefined) {
+        location.assign('/index.html');
+    }
+    
+    titleElement.value = note.title;
+    bodyElement.value = note.body;
 });
