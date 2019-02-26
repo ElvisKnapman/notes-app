@@ -33,3 +33,11 @@ document.querySelector('#search-text').addEventListener('input', e => {
 document.querySelector('#filter-by').addEventListener('change', e => {
     console.log(e.target.value);
 });
+
+window.addEventListener('storage', (event) => {
+    if (event.key === 'notes') {
+        notes = JSON.parse(event.newValue);
+    }
+
+    renderNotes(notes, filters);
+});
