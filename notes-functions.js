@@ -70,3 +70,8 @@ const renderNotes = (notes, filters) => {
         document.querySelector('.notes').appendChild(noteElement);
     });
 }
+
+// generate the last edited message display
+const generateLastEdited = (timestamp) => {
+    return `Last edited ${moment(timestamp).fromNow()}`
+}
