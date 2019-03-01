@@ -1,6 +1,7 @@
 const titleElement = document.querySelector('#note-title');
 const bodyElement = document.querySelector('#note-body');
 const removeElement = document.querySelector('#remove-note');
+const lastEdited = document.querySelector('#last-edited');
 
 // extract note id from URL hash and remove the '#' from the string
 const noteId = location.hash.substring(1);
@@ -20,16 +21,21 @@ if (note === undefined) {
 
 titleElement.value = note.title;
 bodyElement.value = note.body;
+lastEdited.textContent = generateLastEdited(note.updatedAt);
 
 titleElement.addEventListener('input', (event) => {
     // update note title as user types and save 
     note.title = event.target.value;
+    note.updatedAt = moment();
+    lastEdited.textContent = generateLastEdited(note.updatedAt);
     saveNotes(notes);
 });
 
 bodyElement.addEventListener('input', (event) => {
     // update note body as user types and save 
     note.body = event.target.value;
+    note.updatedAt = moment().valueOf();
+    lastEdited.textContent = generateLastEdited(note.updatedAt);
     saveNotes(notes);
 });
 
@@ -55,4 +61,5 @@ window.addEventListener('storage', (event) => {
     
     titleElement.value = note.title;
     bodyElement.value = note.body;
+    lastEdited.textContent = generateLastEdited(note.updatedAt);
 });
