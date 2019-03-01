@@ -11,11 +11,14 @@ renderNotes(notes, filters);
 
 document.querySelector('#create-note').addEventListener('click', e => {
     const id = uuidv4();
+    const timestamp = moment().valueOf();
     // add new note object to notes array
     notes.push({
         id: id,
         title: '',
-        body: ''
+        body: '',
+        createdAt: timestamp,
+        updatedAt: timestamp
     });
 
     saveNotes(notes);
