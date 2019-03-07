@@ -2,19 +2,13 @@
 const getSavedNotes = () => {
     const notesJSON = localStorage.getItem('notes');
 
-    // if there was saved data in localStorage, return it
-    if (notesJSON !== null) {
-       return JSON.parse(notesJSON);
-    } else {
-        return [];
-    }
+    // if there was saved data in localStorage, return it.. otherwise return empty array
+    return notesJSON !== null ? JSON.parse(notesJSON) : [];
 };
 
 // remove a note from the list
 const removeNote = (id) => {
-    const noteIndex = notes.findIndex(function(note) {
-        return note.id === id;
-    });
+    const noteIndex = notes.findIndex((note) => note.id === id);
 
     // if no note was found above, noteIndex would contain -1. If a note was found, noteIndex contains its position
     // and we will delete it
@@ -98,9 +92,7 @@ const sortNotes = (notes, sortBy) => {
 // render application notes
 const renderNotes = (notes, filters) => {
     notes = sortNotes(notes, filters.sortBy);
-    const filteredNotes = notes.filter(note => {
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase());
-    });
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()));
 
     // reset the HTML contents so notes don't continuously stack
     document.querySelector('.notes').innerHTML = '';
@@ -113,6 +105,4 @@ const renderNotes = (notes, filters) => {
 }
 
 // generate the last edited message display
-const generateLastEdited = (timestamp) => {
-    return `Last edited ${moment(timestamp).fromNow()}`
-}
+const generateLastEdited = (timestamp) => `Last edited ${moment(timestamp).fromNow()}`;
