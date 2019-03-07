@@ -10,9 +10,7 @@ const noteId = location.hash.substring(1);
 let notes = getSavedNotes();
 
 // find and store the current note object being edited
-let note = notes.find((note) => {
-    return note.id === noteId;
-});
+let note = notes.find((note) => note.id === noteId);
 
 // if a note isn't found, redirect back to the home page
 if (note === undefined) {
