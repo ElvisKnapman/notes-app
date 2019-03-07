@@ -10,7 +10,7 @@ const filters = {
 renderNotes(notes, filters);
 
 
-document.querySelector('#create-note').addEventListener('click', event => {
+document.querySelector('#create-note').addEventListener('click', (event) => {
     const id = uuidv4();
     const timestamp = moment().valueOf();
     // add new note object to notes array
@@ -29,12 +29,12 @@ document.querySelector('#create-note').addEventListener('click', event => {
 });
 
 
-document.querySelector('#search-text').addEventListener('input', event => {
+document.querySelector('#search-text').addEventListener('input', (event) => {
     filters.searchText = event.target.value.toLowerCase();
     renderNotes(notes, filters);
 });
 
-document.querySelector('#filter-by').addEventListener('change', event => {
+document.querySelector('#filter-by').addEventListener('change', (event) => {
     filters.sortBy = event.target.value;
     renderNotes(notes, filters);
 });
