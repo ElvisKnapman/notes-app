@@ -13,7 +13,7 @@ let notes = getSavedNotes();
 let note = notes.find((note) => note.id === noteId);
 
 // if a note isn't found, redirect back to the home page
-if (note) {
+if (!note) {
     location.assign('/index.html');
 }
 
@@ -53,7 +53,7 @@ window.addEventListener('storage', (event) => {
     });
     
     // if a note isn't found, redirect back to the home page
-    if (note) {
+    if (!note) {
         location.assign('/index.html');
     }
     
