@@ -3,7 +3,11 @@ const getSavedNotes = () => {
     const notesJSON = localStorage.getItem('notes');
 
     // if there was saved data in localStorage, return it.. otherwise return empty array
-    return notesJSON !== null ? JSON.parse(notesJSON) : [];
+    try {
+        return notesJSON !== null ? JSON.parse(notesJSON) : [];
+    } catch (e) {
+        return [];
+    }
 };
 
 // remove a note from the list
